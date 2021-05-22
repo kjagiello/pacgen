@@ -1,0 +1,28 @@
+[package]
+name = "pacgen"
+version = "0.1.0"
+authors = ["Krzysztof Jagiello <me@kjagiello.com>"]
+edition = "2018"
+
+[lib]
+name = "pacgen"
+path = "src/lib.rs"
+
+[[bin]]
+name = "pacgen"
+path = "src/cli.rs"
+doc = false
+
+[dependencies]
+clap = "~2.33.3"
+dynfmt = { version = "~0.1.5", features = ["curly"] }
+serde = { version = "~1.0.117", features = ["derive"] }
+serde_json = "~1.0"
+toml = "~0.5.8"
+
+log = "~0.4.14"
+env_logger = "~0.8.3"
+
+# Server
+hyper = { version = "~0.14", features = ["http1", "http2", "server", "runtime"] }
+tokio = { version = "~1", features = ["full"] }
