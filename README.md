@@ -9,13 +9,13 @@ Easily create a PAC file from a TOML config.
 You can generate a PAC file from a TOML file using the latest stable pacgen Docker image:
 
 ```shell
-cat pac.toml | docker run --rm -i ghcr.io/kjagiello/pacgen:latest -
+docker run --rm -it -v (pwd)/your-proxy.toml:/proxy.toml pacgen proxy.toml
 ```
 
 You can also serve this file (the HTTP server binds by default at `127.0.0.1:8000`):
 
 ```shell
-cat pac.toml | docker run --rm -i ghcr.io/kjagiello/pacgen:latest -s -
+docker run --rm -it -v (pwd)/your-proxy.toml:/proxy.toml pacgen -s proxy.toml
 ```
 
 ### CLI documentation
