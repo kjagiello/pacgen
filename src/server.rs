@@ -30,7 +30,9 @@ fn log_request<T, U>(remote_addr: &SocketAddr, req: &Request<T>, response: &Resp
 
 #[tokio::main]
 pub async fn serve(config: Config) {
-    let ctx = Arc::new(Context { pac: config.pac });
+    let ctx = Arc::new(Context {
+        pac: config.pac.trim_end().to_owned(),
+    });
 
     let make_service = make_service_fn(move |conn: &AddrStream| {
         let ctx = ctx.clone();
