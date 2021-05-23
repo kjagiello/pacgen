@@ -18,15 +18,16 @@ fn build_addr(addr: &Address) -> String {
 }
 
 fn build_proxy(proxy: Arc<Proxy>) -> String {
-    let proxy_config = match *proxy {
-        Proxy::Direct => "DIRECT".to_owned(),
-        Proxy::Socks(ref addr) => format!("SOCKS {}", build_addr(&addr)),
-        Proxy::Socks4(ref addr) => format!("SOCKS4 {}", build_addr(&addr)),
-        Proxy::Socks5(ref addr) => format!("SOCKS5 {}", build_addr(&addr)),
-        Proxy::Http(ref addr) => format!("HTTP {}", build_addr(&addr)),
-        Proxy::Https(ref addr) => format!("HTTPS {}", build_addr(&addr)),
+    let (name, addr) = match *proxy {
+        Proxy::Direct => ("DIRECT", None),
+        Proxy::Socks(ref addr) => ("SOCKS", Some(addr)),
+        Proxy::Socks4(ref addr) => ("SOCKS4", Some(addr)),
+        Proxy::Socks5(ref addr) => ("SOCKS5", Some(addr)),
+        Proxy::Http(ref addr) => ("HTTP", Some(addr)),
+        Proxy::Https(ref addr) => ("HTTPS", Some(addr)),
     };
-    proxy_config
+    addr.map(|addr| format!("{} {}", name, build_addr(addr)))
+        .unwrap_or_else(|| name.to_owned())
 }
 
 fn build_rules(config: &Config) -> Vec<Rule> {

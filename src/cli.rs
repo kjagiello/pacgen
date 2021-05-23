@@ -52,14 +52,14 @@ pub fn main() -> io::Result<()> {
                 .short("h")
                 .requires("serve")
                 .takes_value(true)
-                .help("Host to bind the PAC server to"),
+                .help("Host to bind the PAC server at [default: 127.0.0.1]"),
         )
         .arg(
             Arg::with_name("port")
                 .short("p")
                 .takes_value(true)
                 .requires("serve")
-                .help("Port to bind the PAC server to"),
+                .help("Port to bind the PAC server at [default: 8080]"),
         )
         .arg(
             Arg::with_name("CONFIG")
