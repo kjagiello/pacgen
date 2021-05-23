@@ -116,6 +116,12 @@ pub fn main() -> io::Result<()> {
                 })
         };
 
+        // Setup a SIGTERM handler
+        ctrlc::set_handler(move || {
+            process::exit(1);
+        })
+        .expect("Error setting Ctrl-C handler");
+
         let config = ServerConfig { addr, pac };
         serve(config);
     } else {
