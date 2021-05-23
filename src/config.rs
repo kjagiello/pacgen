@@ -103,8 +103,8 @@ mod concrete {
     }
 }
 
-pub fn parse(content: &str) -> ConfigResult<concrete::Config> {
-    let config = raw::Config::parse(&content)?;
+pub fn parse(config: &str) -> ConfigResult<concrete::Config> {
+    let config = raw::Config::parse(&config)?;
     let config = concrete::Config::from(config)?;
     Ok(config)
 }
