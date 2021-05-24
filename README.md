@@ -1,6 +1,12 @@
 # pacgen - Proxy Auto-Config (PAC) generator
 
-Easily create a PAC file from a TOML config.
+Easily create a [PAC file](https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_PAC_file) from a TOML config.
+
+## Features
+
+- Generatic a PAC file based on a TOML config:
+    - Forwarding traffic to a proxy based on hostnames
+- Serving the PAC file using a built-in web server
 
 ## Usage
 
@@ -22,7 +28,9 @@ You can also serve this file (the HTTP server binds by default at `127.0.0.1:800
 docker run \
     --rm -it \
     -v $(pwd)/your-proxy.toml:/proxy.toml \
+    -p 127.0.0.1:8080:8080 \
     ghcr.io/kjagiello/pacgen:latest \
+    -h 0.0.0.0
     -s proxy.toml
 ```
 
