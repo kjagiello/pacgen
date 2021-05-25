@@ -110,7 +110,7 @@ List of rules that are evaluated in the order they appear in in the config. In t
 the traffic to `*.evil.corp` will be routed through the `corporate-tunnel`
 proxy, while all other traffic will go straight to the target.
 
-```
+```toml
 [[rules]]
 proxy = ["corporate-tunnel"]
 allowed_hosts = ["*.evil.corp"]
